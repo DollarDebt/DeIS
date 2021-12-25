@@ -31,9 +31,9 @@ bad_channels = ['Fp1', 'TP9', 'AF7', 'AF8']
 info.set_montage('standard_1020')
 info['bads'] = bad_channels
 print(trial)
-mne.viz.set_browser_backend("pyqtgraph")
+# mne.viz.set_browser_backend("pyqtgraph")
 raw = mne.io.RawArray(trial, info)
 print(raw)
-raw.plot(block = True)
+raw.plot()
 raw.plot_psd(average=True)
 # raw.plot(block = True)
