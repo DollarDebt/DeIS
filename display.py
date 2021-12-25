@@ -2,6 +2,7 @@ import mne
 import numpy as np
 import scipy.io
 import matplotlib
+import matplotlib.pyplot as plt
 import mne_qt_browser
 
 files = ['/Users/maxwellchen/Desktop/Nguyen_et_al/Short_words/sub_1_ch64_s_eog_removed_256Hz.mat',
@@ -16,7 +17,7 @@ print(keys)
 # all_words = dict[keys[4]]
 # Out = all_words[0][1]
 all_words = dict['eeg_data_wrt_task_rep_no_eog_256Hz_last_beep']
-trial = all_words[0][0]
+trial = all_words[0][0]/30
 # In = all_words[1]
 # Up = all_words[2]
 # print(np.shape(Out))
@@ -35,5 +36,7 @@ print(trial)
 raw = mne.io.RawArray(trial, info)
 print(raw)
 raw.plot()
-raw.plot_psd(average=True)
+# raw.plot_psd(average=True)
 # raw.plot(block = True)
+plt.plot(trial[0])
+plt.show()
