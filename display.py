@@ -17,7 +17,7 @@ print(keys)
 # all_words = dict[keys[4]]
 # Out = all_words[0][1]
 all_words = dict['eeg_data_wrt_task_rep_no_eog_256Hz_last_beep']
-trial = all_words[0][0]/30
+trial = all_words[0][0]/1000
 # In = all_words[1]
 # Up = all_words[2]
 # print(np.shape(Out))
@@ -34,7 +34,7 @@ info['bads'] = bad_channels
 print(trial)
 # mne.viz.set_browser_backend("pyqtgraph")
 raw = mne.io.RawArray(trial, info)
-print(raw)
+print(raw.info)
 raw.plot()
 # raw.plot_psd(average=True)
 # raw.plot(block = True)
