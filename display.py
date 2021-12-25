@@ -32,6 +32,7 @@ info.set_montage('standard_1020')
 info['bads'] = bad_channels
 # mne.viz.set_browser_backend("pyqtgraph")
 raw = mne.io.RawArray(trial, info)
+print(raw['FCz'])
 # raw.plot()
 # raw.plot_psd(average=True)
 # raw.plot(block = True)
@@ -41,18 +42,10 @@ raw = mne.io.RawArray(trial, info)
 #     plt.plot(trial[x])
 #     plt.title(f"electrode{x}")
 #     plt.show()
-col = 9
-sum = 0
-for x in range(64):
-    sum += trial[x, col]
-sum/=64
-print(f'64: {sum}')
 
-sum = 0
+
+
+col = 10
+print(f'64: {np.average(trial[:, col])}')
 trial = np.delete(trial, [0,9,32,63], axis = 0)
-for x in range(60):
-    sum += trial[x, col]
-    # sum /= 64
-# print(np.max(trial[:, 0]))
-sum/=60
-print(f'60: {sum}')
+print(f'60: {np.average(trial[:, col])}')
