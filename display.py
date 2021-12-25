@@ -13,11 +13,10 @@ files = ['/Users/maxwellchen/Desktop/Nguyen_et_al/Short_words/sub_1_ch64_s_eog_r
          '/Users/maxwellchen/Desktop/Nguyen_et_al/Short_words/sub_12b_ch64_s_eog_removed_256Hz.mat']
 dict = scipy.io.loadmat(files[0])
 keys = list(dict.keys())
-print(keys)
 # all_words = dict[keys[4]]
 # Out = all_words[0][1]
 all_words = dict['eeg_data_wrt_task_rep_no_eog_256Hz_last_beep']
-trial = all_words[0][0]/1000
+trial = all_words[0][0]
 # In = all_words[1]
 # Up = all_words[2]
 # print(np.shape(Out))
@@ -31,12 +30,29 @@ info = mne.create_info(ch_names, ch_types=ch_types, sfreq=256)
 bad_channels = ['Fp1', 'TP9', 'AF7', 'AF8']
 info.set_montage('standard_1020')
 info['bads'] = bad_channels
-print(trial)
 # mne.viz.set_browser_backend("pyqtgraph")
 raw = mne.io.RawArray(trial, info)
-print(raw.info)
-raw.plot()
+# raw.plot()
 # raw.plot_psd(average=True)
 # raw.plot(block = True)
-plt.plot(trial[0])
-plt.show()
+
+# for x in range(32):
+#     print(x)
+#     plt.plot(trial[x])
+#     plt.title(f"electrode{x}")
+#     plt.show()
+col = 9
+sum = 0
+for x in range(64):
+    sum += trial[x, col]
+sum/=64
+print(f'64: {sum}')
+
+sum = 0
+trial = np.delete(trial, [0,9,32,63], axis = 0)
+for x in range(60):
+    sum += trial[x, col]
+    # sum /= 64
+# print(np.max(trial[:, 0]))
+sum/=60
+print(f'60: {sum}')
